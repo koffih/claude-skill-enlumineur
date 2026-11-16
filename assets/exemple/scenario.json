@@ -1,0 +1,24 @@
+{
+  "titre": "Guide d'utilisation : clients",
+  "langue": "fr",
+  "introduction": "Comment retrouver un client, consulter sa fiche et suivre ses factures.",
+  "ecrans": [
+    {
+      "id": "clients",
+      "titre": "Clients",
+      "chemin": "/app/clients",
+      "categorie": "Ventes",
+      "menu": "Ventes › Clients",
+      "attendre": "titre:Clients",
+      "resume": "La liste de tous les clients, avec leur solde et leur dernière facture.",
+      "acces": "Rôles vendeur et administrateur.",
+      "etapes": [
+        { "legende": "Tapez le nom du client dans « Rechercher ».", "saisir": { "cible": "aria:Rechercher", "texte": "Boulangerie Martin" } },
+        { "legende": "Cliquez sur le client pour ouvrir sa fiche.", "cliquer": "texte:Boulangerie Martin" },
+        { "legende": "« Nouvelle facture » crée une facture brouillon : le guide le montre sans le cliquer.", "surligner": "texte:Nouvelle facture" }
+      ],
+      "champs": ["« Rechercher » : nom, courriel ou numéro de client."],
+      "erreurs": ["« Aucun client trouvé » : vérifiez l'orthographe ou retirez les filtres."]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "base": "https://app.example.com",
+  "langue": "fr",
+  "largeurs": [1440, 390],
+  "hauteur": 1000,
+  "pause": 2500,
+  "sortie": "doc-enlumineur",
+  "compte": {
+    "creer": "bash compte.sh creer",
+    "supprimer": "bash compte.sh supprimer",
+    "identifiant": "guide-demo@example.com",
+    "motDePasseFichier": ".pw"
+  },
+  "connexion": {
+    "chemin": "/login",
+    "champIdentifiant": "input[type=email]",
+    "champMotDePasse": "input[type=password]",
+    "attente": 4000,
+    "apres": ["localStorage.setItem('sidebar_open', 'true')"],
+    "verifier": "!location.pathname.startsWith('/login')"
+  },
+  "ecritures": {
+    "bloquer": true,
+    "autoriser": ["/auth/v1/token", "/api/session$"]
+  }
+}

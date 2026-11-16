@@ -1,0 +1,9 @@
+{
+  "name": "claude-skill-enlumineur",
+  "private": true,
+  "type": "module",
+  "description": "Engine of the enlumineur skill: real screenshots of a running web app, step by step, with writes blocked.",
+  "dependencies": {
+    "puppeteer-core": "^25.16.0"
+  }
+}
