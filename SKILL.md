@@ -56,6 +56,11 @@ screen loaded), `resume` (what it is for), `acces` (who sees it: from the role c
 `champs` and `erreurs` (from validation code and error messages). Targets: `texte:Exact label`,
 `regex:pattern`, `aria:Label`, `titre:Heading`, `css:selector`.
 
+`titre` is the screen's **menu label** (or its name in the app's screen registry), never the heading the
+screen shows at capture time: a greeting ("Good evening"), a daily counter ("16 decisions waiting") or a
+record name would become the page title and change from one run to the next. `rediger.mjs` never falls
+back to the captured heading; a missing `titre` gives the screen id and a warning.
+
 Show the result of a click only when the click does not write: switching tabs, opening a drawer, a
 menu, a filter. A button that saves, sends, signs or deletes is **framed, never clicked**.
 

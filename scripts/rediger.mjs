@@ -30,10 +30,14 @@ for (const e of scen.ecrans) {
   const r = releve.ecrans.find((x) => x.id === e.id);
   if (!r || r.erreur) { console.log(`  saut ${e.id} : ${r ? r.erreur : 'absent du relevé'}`); continue; }
   const vu = r.vu || {};
+  // Le titre (H1 et texte alternatif) vient du scénario, c'est-à-dire du libellé du menu ou du registre des écrans :
+  // jamais du texte affiché au moment de la capture (salutation, compteur du jour, nom d'un dossier).
+  const titre = (e.titre || '').trim() || e.id;
+  if (!e.titre) console.log(`  attention ${e.id} : pas de titre dans le scénario, l'identifiant est utilisé (donnez le libellé du menu)`);
   const p = [];
-  p.push(`# ${e.titre || vu.titre}`, '');
+  p.push(`# ${titre}`, '');
   if (e.menu) p.push(`*${T.menu} : ${e.menu}*`, '');
-  p.push(img(r.captures.vue, e.titre || vu.titre), '');
+  p.push(img(r.captures.vue, titre), '');
   p.push(`## ${T.role}`, '', e.resume || T.todo, '');
   p.push(`## ${T.acces}`, '', e.acces || T.todo, '');
   if (vu.demonstration) p.push(`> ${T.demo}`, '');
@@ -54,7 +58,7 @@ for (const e of scen.ecrans) {
   const md = p.join('\n').replace(/\n{3,}/g, '\n\n');
   fs.writeFileSync(path.join(sortie, 'pages', `${e.id}.md`), md);
   const aCompleter = (md.match(new RegExp(T.todo, 'g')) || []).length;
-  manifeste.push({ id: e.id, titre: e.titre || vu.titre, categorie: e.categorie || null, ordre: e.ordre ?? manifeste.length, fichier: `pages/${e.id}.md`, images: [r.captures.vue, ...r.etapes.map((s) => s.capture).filter(Boolean), r.captures.resultat, mob?.[1]].filter(Boolean), a_completer: aCompleter });
+  manifeste.push({ id: e.id, titre, categorie: e.categorie || null, ordre: e.ordre ?? manifeste.length, fichier: `pages/${e.id}.md`, images: [r.captures.vue, ...r.etapes.map((s) => s.capture).filter(Boolean), r.captures.resultat, mob?.[1]].filter(Boolean), a_completer: aCompleter });
   ordre.push(e);
   console.log(`  page ${e.id}${aCompleter ? ` (${aCompleter} « ${T.todo} »)` : ''}`);
 }
